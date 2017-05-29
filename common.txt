@@ -1,5 +1,5 @@
-add(master){
-}
 
+add(master,exp){
+}
 div(){
 }
