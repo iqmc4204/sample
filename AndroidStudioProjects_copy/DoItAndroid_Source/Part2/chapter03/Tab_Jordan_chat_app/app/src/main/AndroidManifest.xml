@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.seongyungo.tab_jordan_chat_app">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".Splash_Activity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MainActivity"
+            android:layout="@layout/main_activity" />
+        <activity
+            android:name=".TabActivity"
+            android:layout="@layout/tab_activity" />
+        <activity
+            android:name=".Home_Activity"
+            android:layout="@layout/home_activity" />
+        <activity
+            android:name=".AppInfo_Activity"
+            android:layout="@layout/appinfo_activity" />
+        <activity
+            android:name=".Joinus_Activity"
+            android:layout="@layout/joinus_activity"/>
+        <activity
+            android:name=".Community_Activity"
+            android:layout="@layout/community_activity" />
+        <activity
+            android:name=".Write_Activity"
+            android:layout="@layout/write_activity" />
+
+    </application>
+
+</manifest>
