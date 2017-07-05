@@ -1,1 +1,9 @@
+<<<<<<< HEAD
 source : 1
+=======
+example remote and local
+
+modified second
+>>>>>>> 8ef786af7e8fb59bd66911d28ca4677e92458a93
+
+ㅇㅋㅇㅋ 괜찮아 중복 커밋

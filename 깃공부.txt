@@ -1,0 +1,314 @@
+*git init - 저장소 생성 ("현재 디렉토리를 버전관리 한다.")
+
+.git 디렉토리가 자동으로 생성 (프로젝트의 버전 주소 생성정보 등을 담고있음)
+
+
+*이제 텍스트 파일을 만들어본다.
+
+vim f1.txt -> i 눌러 끼워넣기 후 source : 1 이란 내용입력 -> esc  -> : 입력시 하단에 
+입력창생성 -> wq입력(저장후 끝내기) -> 엔터
+
+*cat f1.txt를 이용해 내용 확인
+
+
+
+
+
+*status 명령어(저장소의 상태를 보여준다.)
+
+
+git status : Untracked files~~~~ f1.txt 라 뜬다. -> f1.txt는 버전관리가 되고있는 디렉토리인
+gitfth에 존재하지만 이파일을 깃에게 "버전관리를 시작해" 라고 얘기하기전까지 깃은 이파일을 무시한다.
+
+
+*git add f1.txt : 이파일 버전관리 시작해
+
+그후 git status 입력시 : new file : f1.txt(git add를 통해 tracking이 시작되었다.)
+
+
+따라서, 새로 추가한파일은 git add명령을 통해 명확하게 이걸 추적하라고 해줘야한다.
+왜냐하면, 그냥 자동으로 다할시 우리가 프로젝트를 하다보면 프로젝트의 핵심적인 파일이있고,
+임시적으로 필요한 파일이 있을경우 임시로 필요한파일은 버전관리에 포함되면 안되는데 이런
+파일을 배제하기 위해 관리해야할 파일이 무엇인지 깃에게 명확히 알려주기 위해서 필요하다.
+
+
+
+
+*git config --global user.name sungyun (작업한 사람의 이름)
+*git config --global user.email iqmc4204@naver.com (작업한 사람의 이메일)
+
+이름과 이메일을 보고 누가 작업한건지 판단
+
+
+git commit 입력후 i를 눌러 최상단에 버전의 정보(무엇이 수정되었는지 등) 입력 후 
+esc -> :wq
+
+
+git log 명령어를 통해 누가 어떤버전의 정보를 만들었는지 확인
+
+
+
+
+그후 f1.txt의 내용을 source : 2로 수정후
+
+git status 명령어 입력시 modified : f1.txt(f1.txt가 수정되었다) 라고 뜬다.
+
+그후 다시 git add f1.txt 명령어를 통해 다시 add를 시켜주어야 한다.
+
+그후 git status 입력시 modified:f1.txt라고 뜬다.
+
+
+git commit 명령어를 통해 수정된 f1.txt의 커밋메세지를 2로 하고
+
+git log 명령어를 통해 확인
+
+
+
+
+
+
+///////////////과제 : f2.txt만들어 커밋 하기
+
+cp f1.txt f2.txt : f1.txt와 같은 f2.txt 만들기
+
+git status
+
+git add f2.txt
+
+git status
+
+git commit
+
+git log 확인
+
+
+
+//////////////////f1.txt , f2.txt 둘다 수정해보기
+
+f1.txt , f2.txt 모두 vim으로 수정후
+
+git status 시 모두 modifided로 바뀌어있다.
+
+git add f1.txt 입력
+
+f1.txt 는 초록색 modified , f2.txt는 빨간색 modified (따라서 원하는것만 add하여 commit할수있다.)
+
+git add가 된것만 git commit가 될 수 있다.
+
+따라서 git commit시 f1.txt만 커밋된다.
+
+
+즉, git add f1.txt 라는 명령 실행시 f1.txt는 커밋이 될 수 있는 상태 (stage area)이다.
+
+stage = 커밋이 되기위한 파일들이 가는곳
+
+repository = 커밋이 된 결과가 저장되는곳
+
+
+
+
+
+
+
+
+
+////////////////////////////////////////차이점을 알고 과거 어느시점의 내용을 알수있다
+
+
+*git log -p : 각각의 커밋과 커밋사이 소스사이의 차이점을 확인할 수 있다.
+
+
+
+
+ex) commit id b21b9583e217c80250a716ce9eb8c3b12445a25e 가 버전 2일시
+
+git log b21b9583e217c80250a716ce9eb8c3b12445a25e 하면 버전 2이하들만 log에 출력됨
+
+
+
+
+*git diff commitid..commitid: 각각의 commit id 사이에서의 소스상의 차이점이 궁금할때
+
+
+*git diff : 내가 어떠한 직전에 어떤 작업을 했는지 소스코드상으로 보여줌
+
+
+git log -p => 로그들의 버전간의 차이점 확인
+git diff 버전1 버전2 => 두 버전 사이의 차이점 확인
+dif diff => add되는 파일의 이전 버전과의 차이점 확인
+
+
+
+//////////////////////////////////////////////////////////과거의 버전으로 돌아가기
+
+*git reset commitid --hard : commitid 이후의 버전은 날린다.
+
+reset는 원격저장소에선 쓰지말자. 그전 단계 로컬에서만 쓰도록 하자.
+
+
+*reset 와 revert의 차이점을 그린 만화
+http://www.popit.kr/
+
+
+
+
+
+////////////////////////////////////////////////////////////////////////
+
+*git commit --help : commit 도움말 볼 수 있다.
+
+
+
+*git commit -a : git add를 별도로 하지않아도 수정한파일을 커밋 할 수 있게 해준다.
+
+*git commit -am "커밋메세지" : 커밋시 에디터로 이동하지않고 바로 커밋메세지를 입력할 수 있다.
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////////
+
+깃은 파일이 수만개가 있어도 그 내용이 같다면 수만개의 파일은 똑같은 object파일을 
+가리킴으로써 중복을 막는다.
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////
+
+git branch : 브랜치 목록을 본다. 기본 master로 지정되있음
+
+git branch exp(생성할branch이름) : 예를들어 exp브렌치를 생성
+
+git checkout exp : master에서 checkout하고 exp브렌치로 변경
+
+
+*branch를 master에서 exp로 변경시 master에 있는 상태를 exp가 그대로 가져간다.
+예를들어 f1.txt라는 파일이 master에 있었을시 exp도 그대로 가져간다.
+
+*그러나 exp에서 f1.txt를 수정하고, commit를 새로했다. 그다음 branch를 다시
+master로 변경시 master에는 새로 수정된 f1.txt가 없다.
+그러나 exp로 다시 branch변경시 변경된 f1.txt에 있다.
+
+
+
+
+
+//////////////////////////////////////////////////////////////branch정보확인
+
+git log --branches : 모든 브렌치 파일의 로그를 보여줌
+
+git log --branches --decorate : 모든 브렌치 파일의 로그를 보여주는데, 브렌치를 표시해줌
+
+git log --branches --decorate --graph : 각각 최근에 commit된 파일의 부모를 표시
+
+git log --branches --decorate --graph --oneline : 각상태를 한줄로 볼 수 있다.
+
+
+git log "비교할 브랜치 명 1".."비교할 브랜치 명 2" : 브랜치 간에 비교할 때
+
+
+
+git diff "비교할 브랜치 명 1".."비교할 브랜치 명 2" : 브랜치 간의 코드를 비교 할 때 
+
+
+
+git log --branches --graph --decorate --oneline : 로그에 모든 브랜치를 표시하고, 그래프로 표현하고, 브랜치 명을 표시하고, 한줄로 표시할 때 
+
+
+
+////////////////////////////////////////////////////////////////branch병합
+
+ A 브랜치로 B 브랜치를 병합할 때 (A ← B)
+
+git checkout A :(합칠녀석에게 checkout한다.)
+git merge B :(합쳐질녀석을 merge한다.)
+
+git branch -d "브렌치이름" : 브렌치 삭제
+
+
+
+//////////////////////////////////////////////////////////////////
+
+
+git branch -d 브렌치이름 : 브렌치 삭제
+
+git branch -D 브렌치이름 : 브렌치 강제삭제
+
+
+master branch에 있는 f1.txt의내용 : 1,2
+
+exp branch에 있는 f1.txt의내용 : 2,3
+
+이때 master branch에 exp branch merge시 merge한 master branch에 있는 f1.txt의내용 :1,2,3
+
+이렇게 내용이 합쳐진다. 그러나 만약 같은자리의 내용이 변경될시
+
+ex) master branch 의 f1.txt내용 : add(master)
+    exp branch 의    f1.txt내용 : add(exp) 
+    인상태에서 merge시 깃은 버전관리 책임을 사용자에게 넘긴다.
+    따라서 merge후 cat시 
+
+    병합된 f1.txt의내용 :<<<<<<<<HEAD
+		     add(master)
+		     
+		     ==========
+		     add(exp)
+		     >>>>>>>>>exp
+
+	따라서 현재 상태에서는 commit를 할 수 없게된다.
+	git status로 상태를보면 both added로 commit가 안되는데, 사용자가 버전관리 후 수정한다음
+	add시 commit가능하다.
+
+
+/////////////////////////////////////////////////////////////////////
+
+*git stash ―help : 명령어 도움말
+
+*git stash
+
+exp branch의 f1.txt를 작업하다가, 작업이 다끝나지 않은상태로 master branch로 checkout해야하는 상활일때
+exp branch의 f1.txt는 master branch에서 작업할때 영향을 준다.
+
+따라서 작업이 다끝나지 않은 f1.txt를 git stash로 숨겨버린다.
+
+
+*git stash apply : 숨겨놓았던것을 다시 보이게한다.
+
+*git stash list : stash 한것 list로 보여준다.(제일 위에 것이 최근)
+
+*git stash drop : 가장 최신 stash를 삭제
+
+*git stash pop : git stash apply; git stash drop; 의 기능 (나타내고 삭제)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
